@@ -10,6 +10,7 @@ use XML::Atom::Client;
 use YAML;
 
 (my $config = $ENV{SCRIPT_FILENAME}) =~ s/\.cgi$/.yaml/;
+warn $config;
 our $conf = YAML::LoadFile($config);
 
 my $q = CGI->new;
@@ -29,7 +30,7 @@ sub do_form {
 <head>
 <title>del.icio.us and Hatena cross-poster</title>
 <style>body { font-family: trebuchet MS, Arial; font-size: 13px }</style>
-<body>
+<body onload="document.forms[0].tags.focus()">
 <h1>del.icio.us and Hatena cross-poster</h1>
 <form action="[% q.url('-query'=>0) %]" method="post">
 <table>
