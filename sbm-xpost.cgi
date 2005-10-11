@@ -10,7 +10,6 @@ use XML::Atom::Client;
 use YAML;
 
 (my $config = $ENV{SCRIPT_FILENAME}) =~ s/\.cgi$/.yaml/;
-warn $config;
 our $conf = YAML::LoadFile($config);
 
 my $q = CGI->new;
