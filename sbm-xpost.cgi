@@ -51,7 +51,9 @@ sub do_post {
     my $q = shift;
     post_delicious($q);
     post_hatena($q);
-    print $q->redirect($q->param('url'));
+    my $url = URI->new("http://www.google.com/url");
+    $url->query_form(sa => 'D', q => $q->param('url'));
+    print $q->redirect($url);
 }
 
 sub post_delicious {
