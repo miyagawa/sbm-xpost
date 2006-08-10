@@ -58,7 +58,7 @@ sub do_post {
 
 sub post_delicious {
     my $q = shift;
-    my $url = URI->new("http://del.icio.us/api/posts/add");
+    my $url = URI->new("https://api.del.icio.us/v1/posts/add");
     $url->query_form(
         url => $q->param('url'),
         description => $q->param('title'),
@@ -67,7 +67,7 @@ sub post_delicious {
         dt   => DateTime->now,
     );
     my $ua = LWP::UserAgent->new;
-    $ua->credentials("del.icio.us:80", "del.icio.us API", $conf->{delicious}->{username}, $conf->{delicious}->{password});
+    $ua->credentials("api.del.icio.us:443", "del.icio.us API", $conf->{delicious}->{username}, $conf->{delicious}->{password});
     my $res = $ua->get($url);
     warn $res->status_line unless $res->is_success;
 }
