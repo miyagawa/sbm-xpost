@@ -74,7 +74,7 @@ sub post_delicious {
 
 sub post_hatena {
     my $q = shift;
-    my $summary = join '', map "[$_]", split /\s+/, $q->param('tags');
+    my $summary = join '', map "[$_]", grep !/^for:/, split /\s+/, $q->param('tags');
     $summary .= " " . $q->param('comment') if $q->param('comment');
     Encode::_utf8_off($summary);
 
