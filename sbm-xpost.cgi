@@ -40,7 +40,7 @@ sub do_form {
 <tr><td style="text-align:right">Tags:</td><td><input size="64" type="text" name="tags" /></td></tr>
 </table>
 <input type="submit" value=" Save " />
-<input type="submit name="subscribe" value=" Save and Subscribe " />
+<input type="submit" name="subscribe" value=" Save and Subscribe " />
 </form>
 <div><a href="javascript:location.href='[% q.url %]?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)">bookmarklet</a></div>
 </body>
