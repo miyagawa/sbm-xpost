@@ -40,6 +40,7 @@ sub do_form {
 <tr><td style="text-align:right">Tags:</td><td><input size="64" type="text" name="tags" /></td></tr>
 </table>
 <input type="submit" value=" Save " />
+<input type="submit name="subscribe" value=" Save and Subscribe " />
 </form>
 <div><a href="javascript:location.href='[% q.url %]?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)">bookmarklet</a></div>
 </body>
@@ -51,8 +52,14 @@ sub do_post {
     my $q = shift;
     post_delicious($q);
     post_hatena($q);
-    my $url = URI->new("http://www.google.com/url");
-    $url->query_form(sa => 'D', q => $q->param('url'));
+
+    my $url;
+    if ($q->param('subscribe')) {
+        $url = URI->new("http://reader.livedoor.com/subscribe/" . $q->param('url'));
+    } else {
+        $url = URI->new("http://www.google.com/url");
+        $url->query_form(sa => 'D', "q" => $q->param('url'))
+    }
     print $q->redirect($url);
 }
 
