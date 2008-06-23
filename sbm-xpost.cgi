@@ -57,8 +57,7 @@ sub do_post {
     if ($q->param('subscribe')) {
         $url = URI->new("http://reader.livedoor.com/subscribe/" . $q->param('url'));
     } else {
-        $url = URI->new("http://www.google.com/url");
-        $url->query_form(sa => 'D', "q" => $q->param('url'))
+        $url = URI->new("http://b.hatena.ne.jp/entry/" . $q->param('url'));
     }
     print $q->redirect($url);
 }
