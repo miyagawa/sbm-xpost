@@ -1,4 +1,4 @@
-#!/ur/local/bin/perl
+#!/usr/local/bin/perl
 use strict;
 use CGI;
 use DateTime;
@@ -10,7 +10,7 @@ use XML::Atom::Entry;
 use XML::Atom::Client;
 use YAML;
 
-(my $config = $ENV{SCRIPT_FILENAME}) =~ s/\.cgi$/.yaml/;
+(my $config = $ENV{SCRIPT_FILENAME}) =~ s/\.cgi$/.yaml.cgi/;
 our $conf = YAML::LoadFile($config);
 
 my $q = CGI->new;
@@ -50,6 +50,10 @@ TEMPLATE
 
 sub do_post {
     my $q = shift;
+
+    my $url = URI->new($q->param('url'))->canonical;
+    $q->param(url => $url);
+
     post_delicious($q);
     post_hatena($q);
 
