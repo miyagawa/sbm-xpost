@@ -22,6 +22,9 @@ if ($q->request_method eq 'POST') {
 
 sub do_form {
     my $q = shift;
+    my $url = $q->param('url');
+    $url =~ s/\?utm_source.*$//;
+    $q->param(url => $url);
     print $q->header('text/html; charset=utf-8');
     binmode STDOUT, ":utf8";
     my $tt = Template->new;
